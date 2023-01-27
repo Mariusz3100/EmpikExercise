@@ -17,10 +17,9 @@ public class MainController {
 
     @GetMapping("/employees/{login}")
     public User getUser(@PathVariable String login) {
-        User user = restTemplate.getForObject(
-                apiUrl + login, User.class);
+        UserInput user = restTemplate.getForObject(
+                apiUrl + login, UserInput.class);
         float calculations = 6f / user.getFollowers() * (2 + user.getPublic_repos());
-        user.setCalculations(calculations);
         LoginData ld = dao.findByLogin(login);
         if (ld == null) {
             ld = new LoginData(null, login, 1);
@@ -28,7 +27,16 @@ public class MainController {
             ld.setRequestCount(ld.getRequestCount() + 1);
         }
         dao.save(ld);
-        return user;
+
+        User ret= new User();
+        ret.setId(user.getId());
+        ret.setName(user.getName());
+        ret.setLogin(user.getLogin());
+        ret.setType(user.getType());
+        ret.setAvatarUrl(user.getAvatar_url());
+        ret.setCreatedAt(user.getCreated_at());
+        ret.setCalculations(calculations);
+        return ret;
     }
 
 

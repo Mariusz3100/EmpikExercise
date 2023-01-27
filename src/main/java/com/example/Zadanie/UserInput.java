@@ -1,7 +1,6 @@
 package com.example.Zadanie;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public class UserInput {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,10 +25,11 @@ public class User {
 
     private String type;
 
-    private String avatarUrl;
-
-    private String createdAt;
+    private String avatar_url;
+    private String created_at;
     private Float calculations;
 
+    private int followers;
+    private int public_repos;
 
 }
