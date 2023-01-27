@@ -23,7 +23,7 @@ public class MainController {
         user.setCalculations(calculations);
         LoginData ld = dao.findByLogin(login);
         if (ld == null) {
-            ld = new LoginData(1l, login, 1);
+            ld = new LoginData(null, login, 1);
         } else {
             ld.setRequestCount(ld.getRequestCount() + 1);
         }
